@@ -52,6 +52,11 @@ console.log(SIMPLE_STORE_CONFIG);
       title.innerText = value[SIMPLE_STORE_CONFIG.sheetTitleColName] || 'N/A';
       body.appendChild(title);
 
+      const price = document.createElement('div');
+      price.classList.add('card-title');
+      price.innerText = value[SIMPLE_STORE_CONFIG.sheetPriceColName] || 'N/A';
+      body.appendChild(price);
+
       const desc = document.createElement('p');
       desc.classList.add('card-text');
       desc.innerText = value[SIMPLE_STORE_CONFIG.sheetDescColName] || '';
