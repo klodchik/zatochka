@@ -1,0 +1,33 @@
+html {
+  font-size: 16px;
+}
+
+.page {
+  color: var(--bs-dark);
+  min-height: 100vh;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.page-header,
+.page-footer {
+  flex-grow: 0;
+  flex-shrink: 0;
+}
+
+.page-content {
+  flex: 1;
+}
+
+.page-header{
+  background: var(--bs-teal);
+  color: var(--bs-light)
+}
+
+.cards-container{
+  padding: 50px 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 30px;
+}
