@@ -1,7 +1,0 @@
-client id
-135907964829-avtvedi95v7d40iks61dsssuv648ao18.apps.googleusercontent.com
-
-api key
-AIzaSyAhZdK0pCcFfZFLvKAz4sZfVSn6yjMBwjI
-
-
