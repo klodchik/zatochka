@@ -1,7 +1,14 @@
 const SIMPLE_STORE_CONFIG = {
-  sheetId: '',                // Google spreadsheet document id
-  sheetImgColName: '',        // Image URL column name
-  sheetTitleColName: '',      // Card title column name
-  sheetDescColName: '',       // Card description column name
-  sheetPriceColName: '',      // Card price column name
+  // Google spreadsheet document id
+  sheetId: '1bfsXqIOGqJzQjimAF7JiOJNQGzdb2f_WsU3_a6zl6Os',
+  // Image URL column name
+  imgColName: 'Зображення',
+  // Card title column name
+  titleColName: 'Назва',
+  // Card description column name
+  descColName: 'Опис',
+  // Card price column name
+  priceColName: 'Ціна',
+  // Card price before discount price
+  priceBeforeDiscountColName: 'Ціна до знижки'
 };

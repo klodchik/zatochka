@@ -1,5 +1,3 @@
-console.log(SIMPLE_STORE_CONFIG);
-
 (async function(){
   window.handleData = (json) => {
     const data = json.feed.entry;
@@ -27,6 +25,16 @@ console.log(SIMPLE_STORE_CONFIG);
     return rows;
   }
 
+  function getImageLink(driveLink) {
+    if (driveLink) {
+      const fileId = driveLink.replace(/.*?file\/d\/(.*?)\/.*/, '$1');
+      if (fileId) {
+        return `https://drive.google.com/uc?export=view&id=${fileId}`
+      }
+    }
+    return './img/placeholder.png'
+  }
+
   function addHtml (entries) {
     const container = window.content;
     const clone = container.cloneNode();
@@ -37,11 +45,15 @@ console.log(SIMPLE_STORE_CONFIG);
       card.classList.add('card');
       clone.appendChild(card);
 
+      const imgContainer = document.createElement('div');
+      imgContainer.classList.add('card-img-container')
+      card.appendChild(imgContainer);
+
       const img = document.createElement('img');
       img.classList.add('card-img-top')
-      img.setAttribute('src', value[SIMPLE_STORE_CONFIG.sheetImgColName] || './img/placeholder.png');
-      img.setAttribute('alt', value[SIMPLE_STORE_CONFIG.sheetTitleColName] || '');
-      card.appendChild(img);
+      img.setAttribute('src', getImageLink(value[SIMPLE_STORE_CONFIG.imgColName]))
+      img.setAttribute('alt', value[SIMPLE_STORE_CONFIG.titleColName] || '');
+      imgContainer.appendChild(img);
 
       const body = document.createElement('div');
       body.classList.add('card-body');
@@ -49,17 +61,18 @@ console.log(SIMPLE_STORE_CONFIG);
 
       const title = document.createElement('h3');
       title.classList.add('card-title');
-      title.innerText = value[SIMPLE_STORE_CONFIG.sheetTitleColName] || 'N/A';
+      title.innerText = value[SIMPLE_STORE_CONFIG.titleColName] || 'N/A';
+      title.setAttribute('title', value[SIMPLE_STORE_CONFIG.titleColName] || 'N/A')
       body.appendChild(title);
 
       const price = document.createElement('div');
       price.classList.add('card-title');
-      price.innerText = value[SIMPLE_STORE_CONFIG.sheetPriceColName] || 'N/A';
+      price.innerText = value[SIMPLE_STORE_CONFIG.priceColName] || 'N/A';
       body.appendChild(price);
 
       const desc = document.createElement('p');
       desc.classList.add('card-text');
-      desc.innerText = value[SIMPLE_STORE_CONFIG.sheetDescColName] || '';
+      desc.innerText = value[SIMPLE_STORE_CONFIG.descColName] || '';
       body.appendChild(desc);
     }
     container.parentNode.replaceChild(clone, container);
