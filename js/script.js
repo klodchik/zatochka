@@ -65,10 +65,24 @@
       title.setAttribute('title', value[SIMPLE_STORE_CONFIG.titleColName] || 'N/A')
       body.appendChild(title);
 
+      const priceContainer = document.createElement('div');
+      priceContainer.classList.add('card-prices');
+      body.appendChild(priceContainer);
+
       const price = document.createElement('div');
-      price.classList.add('card-title');
+
+      if (value[SIMPLE_STORE_CONFIG.priceBeforeDiscountColName]) {
+        price.classList.add('price-discount');
+
+        const priceOld = document.createElement('div');
+        priceOld.classList.add('card-old-price');
+        priceOld.innerText = value[SIMPLE_STORE_CONFIG.priceBeforeDiscountColName];
+        priceContainer.appendChild(priceOld);
+      }
+
+      price.classList.add('card-price');
       price.innerText = value[SIMPLE_STORE_CONFIG.priceColName] || 'N/A';
-      body.appendChild(price);
+      priceContainer.appendChild(price);
 
       const desc = document.createElement('p');
       desc.classList.add('card-text');
