@@ -1,6 +1,6 @@
 const SIMPLE_STORE_CONFIG = {
   // Google spreadsheet document id
-  sheetId: '1bfsXqIOGqJzQjimAF7JiOJNQGzdb2f_WsU3_a6zl6Os',
+  sheetId: '14HKLHvvye3WJ2uz2BCN0ivFhwJAXDtN7hUAfW0swp_o',
   // Image URL column name
   imgColName: 'Зображення',
   // Card title column name
