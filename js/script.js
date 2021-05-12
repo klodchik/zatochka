@@ -1,5 +1,5 @@
 (async function(){
-  window.handleData = (json) => {
+  function handleData(json) {
     const data = json.feed.entry;
     const transformed = transformData(data);
     addHtml(transformed);
@@ -93,10 +93,37 @@
     container.parentNode.replaceChild(clone, container);
   }
 
+  function cleanContent() {
+    const container = window.content;
+    container.innerHTML = '';
+  }
+
   if (SIMPLE_STORE_CONFIG && SIMPLE_STORE_CONFIG.sheetId) {
-    const script = document.createElement('script');
-    script.setAttribute('src', `https://spreadsheets.google.com/feeds/cells/${SIMPLE_STORE_CONFIG.sheetId}/1/public/values?alt=json-in-script&callback=handleData`)
-    document.body.appendChild(script);
+    try {
+      const url = `https://spreadsheets.google.com/feeds/cells/${SIMPLE_STORE_CONFIG.sheetId}/1/public/values?alt=json`;
+      const res = await fetch(url);
+      if (res.ok) {
+        const body = await res.body;
+        const reader = await body.getReader();
+        var content = new Uint8Array();
+        var done = false;
+        while (!done) {
+          const data = await reader.read();
+          if (!data.done) {
+            content = new Uint8Array([...content, ...data.value])
+          }
+          done = data.done;
+        }
+        var encodedString = String.fromCharCode.apply(null, content),
+        json = decodeURIComponent(escape(encodedString));
+        handleData(JSON.parse(json));
+        return;
+      }
+    } catch (err) {
+      console.log('error', err);
+    }
+    cleanContent();
+    window.alert("Помилка завантаження даних!\n Спробуйте знову пізніше.\n\n У разі, якщо помилка з'явиться повторно - будь-ласка повідомте власника або адміністратора сайту");
   }
 }())
 
