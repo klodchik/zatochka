@@ -43,6 +43,7 @@
     for (const value of Object.values(entries)) {
       const card = document.createElement('div');
       card.classList.add('card');
+      clone.classList.add('cards-container--grid');
       clone.appendChild(card);
 
       const imgContainer = document.createElement('div');
