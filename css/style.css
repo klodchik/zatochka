@@ -16,6 +16,10 @@ html {
   flex-shrink: 0;
 }
 
+.navbar>.container {
+  justify-content: flex-start;
+}
+
 .page-content {
   flex: 1;
 }
